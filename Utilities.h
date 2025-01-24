@@ -1384,9 +1384,11 @@ bool eeprom_model_valid() {
 	if (model == MODEL_B4 || model == MODEL_B9) {
 	#elif BOARD_MODEL == BOARD_HELTEC32_V2
 	if (model == MODEL_C4 || model == MODEL_C9) {
-	#elif BOARD_MODEL == BOARD_HELTEC32_V3 || BOARD_MODEL == BOARD_WIRELESS_PAPER
+	#elif BOARD_MODEL == BOARD_HELTEC32_V3
 	if (model == MODEL_C5 || model == MODEL_CA) {
-    #elif BOARD_MODEL == BOARD_RAK4631
+	#elif BOARD_MODEL == BOARD_WIRELESS_PAPER
+	if (model == MODEL_C8) {
+  #elif BOARD_MODEL == BOARD_RAK4631
     if (model == MODEL_11 || model == MODEL_12 || model == MODEL_13 || model == MODEL_14 || model == MODEL_21) {
 	#elif BOARD_MODEL == BOARD_HUZZAH32
 	if (model == MODEL_FF) {
