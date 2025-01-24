@@ -62,7 +62,7 @@ uint8_t eeprom_read(uint32_t mapped_addr);
 	#include "Device.h"
 #endif
 #if MCU_VARIANT == MCU_ESP32
-  #if BOARD_MODEL == BOARD_HELTEC32_V3
+  #if BOARD_MODEL == BOARD_HELTEC32_V3 || BOARD_MODEL == BOARD_HELTEC_PAPER
     //https://github.com/espressif/esp-idf/issues/8855
     #include "hal/wdt_hal.h"
 	#elif BOARD_MODEL == BOARD_T3S3
@@ -188,7 +188,7 @@ uint8_t boot_vector = 0x00;
 			void led_tx_on()  { digitalWrite(pin_led_tx, HIGH); }
 			void led_tx_off() { digitalWrite(pin_led_tx, LOW); }
 		#endif
-	#elif BOARD_MODEL == BOARD_HELTEC32_V3
+	#elif BOARD_MODEL == BOARD_HELTEC32_V3 || BOARD_MODEL == BOARD_HELTEC_PAPER
 			void led_rx_on()  { digitalWrite(pin_led_rx, HIGH); }
 			void led_rx_off() {	digitalWrite(pin_led_rx, LOW); }
 			void led_tx_on()  { digitalWrite(pin_led_tx, HIGH); }
@@ -1384,7 +1384,7 @@ bool eeprom_model_valid() {
 	if (model == MODEL_B4 || model == MODEL_B9) {
 	#elif BOARD_MODEL == BOARD_HELTEC32_V2
 	if (model == MODEL_C4 || model == MODEL_C9) {
-	#elif BOARD_MODEL == BOARD_HELTEC32_V3
+	#elif BOARD_MODEL == BOARD_HELTEC32_V3 || BOARD_MODEL == BOARD_HELTEC_PAPER
 	if (model == MODEL_C5 || model == MODEL_CA) {
     #elif BOARD_MODEL == BOARD_RAK4631
     if (model == MODEL_11 || model == MODEL_12 || model == MODEL_13 || model == MODEL_14 || model == MODEL_21) {

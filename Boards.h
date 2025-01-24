@@ -36,6 +36,7 @@
   #define BOARD_LORA32_V1_0   0x39
   #define BOARD_HELTEC32_V2   0x38
   #define BOARD_HELTEC32_V3   0x3A
+  #define BOARD_HELTEC_PAPER  0x3C
   #define BOARD_RNODE_NG_20   0x40
   #define BOARD_RNODE_NG_21   0x41
   #define BOARD_T3S3          0x42
@@ -448,6 +449,65 @@
               -1  // pin_tcxo_enable
           }
       };
+
+    #elif BOARD_MODEL == BOARD_HELTEC_PAPER
+      #define IS_ESP32S3 true
+      #define HAS_DISPLAY false
+      // #define DISPLAY_MODEL ICMEN2R13EFC1
+      // #define DISPLAY_SCALE 1
+      #define HAS_BLUETOOTH false
+      #define HAS_BLE true
+      #define HAS_CONSOLE false
+      #define HAS_EEPROM true
+      #define HAS_INPUT true
+      #define HAS_SLEEP true
+      #define PIN_WAKEUP GPIO_NUM_0
+      #define WAKEUP_LEVEL 0
+      #define INTERFACE_COUNT 1
+
+      const int pin_btn_usr1 = 0;
+
+      // #if defined(EXTERNAL_LEDS)
+        const int pin_led_rx = 13; // 18?
+        const int pin_led_tx = 14;
+      // #else
+      //   const int pin_led_rx = 35;
+      //   const int pin_led_tx = 35;
+      // #endif
+
+      const uint8_t interfaces[INTERFACE_COUNT] = {SX1262};
+      const bool interface_cfg[INTERFACE_COUNT][3] = {
+                    // SX1262
+          {
+              true, // DEFAULT_SPI
+              true, // HAS_TCXO
+              true  // DIO2_AS_RF_SWITCH
+          },
+      };
+      const int8_t interface_pins[INTERFACE_COUNT][10] = {
+                  // SX1262
+          {
+              8, // pin_ss
+              9, // pin_sclk
+              10, // pin_mosi
+              11, // pin_miso
+              13, // pin_busy
+              14, // pin_dio
+              12, // pin_reset
+              -1, // pin_txen
+              -1, // pin_rxen
+              -1  // pin_tcxo_enable
+          }
+      };
+
+      const int pin_disp_cs = 4;
+      const int pin_disp_dc = 5;
+      const int pin_disp_reset = 6;
+      const int pin_disp_busy = 7;
+      const int pin_disp_en = 45;
+      const int pin_disp_sck = 3;
+      const int pin_disp_mosi = 2;
+      const int pin_disp_miso = -1;
 
     #elif BOARD_MODEL == BOARD_RNODE_NG_20
       #define HAS_DISPLAY true
