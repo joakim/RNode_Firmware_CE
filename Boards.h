@@ -19,31 +19,31 @@
 #ifndef BOARDS_H
   #define BOARDS_H
 
-  #define PLATFORM_ESP32      0x80
-  #define PLATFORM_NRF52      0x70
+  #define PLATFORM_ESP32       0x80
+  #define PLATFORM_NRF52       0x70
 
-  #define MCU_ESP32           0x81
-  #define MCU_NRF52           0x71
+  #define MCU_ESP32            0x81
+  #define MCU_NRF52            0x71
 
   // Boards
-  #define BOARD_RNODE         0x31
-  #define BOARD_HMBRW         0x32
-  #define BOARD_TBEAM         0x33
-  #define BOARD_HUZZAH32      0x34
-  #define BOARD_GENERIC_ESP32 0x35
-  #define BOARD_LORA32_V2_0   0x36
-  #define BOARD_LORA32_V2_1   0x37
-  #define BOARD_LORA32_V1_0   0x39
-  #define BOARD_HELTEC32_V2   0x38
-  #define BOARD_HELTEC32_V3   0x3A
-  #define BOARD_HELTEC_PAPER  0x3C
-  #define BOARD_RNODE_NG_20   0x40
-  #define BOARD_RNODE_NG_21   0x41
-  #define BOARD_T3S3          0x42
-  #define BOARD_TECHO         0x43
-  #define BOARD_E22_ESP32     0x44
-  #define BOARD_GENERIC_NRF52 0x50
-  #define BOARD_RAK4631       0x51
+  #define BOARD_RNODE          0x31
+  #define BOARD_HMBRW          0x32
+  #define BOARD_TBEAM          0x33
+  #define BOARD_HUZZAH32       0x34
+  #define BOARD_GENERIC_ESP32  0x35
+  #define BOARD_LORA32_V2_0    0x36
+  #define BOARD_LORA32_V2_1    0x37
+  #define BOARD_LORA32_V1_0    0x39
+  #define BOARD_HELTEC32_V2    0x38
+  #define BOARD_HELTEC32_V3    0x3A
+  #define BOARD_WIRELESS_PAPER 0x3E
+  #define BOARD_RNODE_NG_20    0x40
+  #define BOARD_RNODE_NG_21    0x41
+  #define BOARD_T3S3           0x42
+  #define BOARD_TECHO          0x43
+  #define BOARD_E22_ESP32      0x44
+  #define BOARD_GENERIC_NRF52  0x50
+  #define BOARD_RAK4631        0x51
 
   // Displays
   #define OLED 0x01
@@ -450,7 +450,7 @@
           }
       };
 
-    #elif BOARD_MODEL == BOARD_HELTEC_PAPER
+    #elif BOARD_MODEL == BOARD_WIRELESS_PAPER
       #define IS_ESP32S3 true
       #define HAS_DISPLAY false
       // #define DISPLAY_MODEL ICMEN2R13EFC1

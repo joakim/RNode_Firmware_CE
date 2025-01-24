@@ -116,8 +116,8 @@ firmware-heltec32_v2_extled:
 firmware-heltec32_v3:
 	arduino-cli compile --fqbn esp32:esp32:heltec_wifi_lora_32_V3 $(COMMON_BUILD_FLAGS) --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x3A\""
 
-firmware-heltec_wireless_paper:
-	arduino-cli compile --fqbn esp32:esp32:heltec_wifi_lora_32_V3 $(COMMON_BUILD_FLAGS) --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x3C\""
+firmware-wireless_paper:
+	arduino-cli compile --fqbn esp32:esp32:heltec_wifi_lora_32_V3 $(COMMON_BUILD_FLAGS) --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x3E\""
 
 firmware-rnode_ng_20:
 	arduino-cli compile --fqbn esp32:esp32:ttgo-lora32 $(COMMON_BUILD_FLAGS) --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x40\""
@@ -187,7 +187,7 @@ upload-heltec32_v3:
 	@sleep 3
 	python3 ./Release/esptool/esptool.py --port $(or $(port), /dev/ttyUSB0) --chip esp32-s3 --baud 921600 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_freq 80m --flash_size 4MB 0x210000 ./Release/console_image.bin
 
-upload-heltec_wireless_paper:
+upload-wireless_paper:
 	arduino-cli upload -p $(or $(port), /dev/ttyUSB0) --fqbn esp32:esp32:heltec_wifi_lora_32_V3
 	@sleep 1
 	rnodeconf $(or $(port), /dev/ttyUSB0) --firmware-hash $$(./partition_hashes ./build/esp32.esp32.heltec_wifi_lora_32_V3/RNode_Firmware_CE.ino.bin)
@@ -346,13 +346,13 @@ release-heltec32_v3:
 	zip --junk-paths ./Release/rnode_firmware_heltec32v3.zip ./Release/esptool/esptool.py ./Release/console_image.bin build/rnode_firmware_heltec32v3.boot_app0 build/rnode_firmware_heltec32v3.bin build/rnode_firmware_heltec32v3.bootloader build/rnode_firmware_heltec32v3.partitions
 	rm -r build
 
-release-heltec_wireless_paper:
-	arduino-cli compile --fqbn esp32:esp32:heltec_wifi_lora_32_V3 $(COMMON_BUILD_FLAGS) --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x3C\""
-	cp ~/.arduino15/packages/esp32/hardware/esp32/$(ESP_IDF_VER)/tools/partitions/boot_app0.bin build/rnode_firmware_heltec_wireless_paper.boot_app0
-	cp build/esp32.esp32.heltec_wifi_lora_32_V3/RNode_Firmware_CE.ino.bin build/rnode_firmware_heltec_wireless_paper.bin
-	cp build/esp32.esp32.heltec_wifi_lora_32_V3/RNode_Firmware_CE.ino.bootloader.bin build/rnode_firmware_heltec_wireless_paper.bootloader
-	cp build/esp32.esp32.heltec_wifi_lora_32_V3/RNode_Firmware_CE.ino.partitions.bin build/rnode_firmware_heltec_wireless_paper.partitions
-	zip --junk-paths ./Release/rnode_firmware_heltec_wireless_paper.zip ./Release/esptool/esptool.py ./Release/console_image.bin build/rnode_firmware_heltec_wireless_paper.boot_app0 build/rnode_firmware_heltec_wireless_paper.bin build/rnode_firmware_heltec_wireless_paper.bootloader build/rnode_firmware_heltec_wireless_paper.partitions
+release-wireless_paper:
+	arduino-cli compile --fqbn esp32:esp32:heltec_wifi_lora_32_V3 $(COMMON_BUILD_FLAGS) --build-property "compiler.cpp.extra_flags=\"-DBOARD_MODEL=0x3E\""
+	cp ~/.arduino15/packages/esp32/hardware/esp32/$(ESP_IDF_VER)/tools/partitions/boot_app0.bin build/rnode_firmware_wireless_paper.boot_app0
+	cp build/esp32.esp32.heltec_wifi_lora_32_V3/RNode_Firmware_CE.ino.bin build/rnode_firmware_wireless_paper.bin
+	cp build/esp32.esp32.heltec_wifi_lora_32_V3/RNode_Firmware_CE.ino.bootloader.bin build/rnode_firmware_wireless_paper.bootloader
+	cp build/esp32.esp32.heltec_wifi_lora_32_V3/RNode_Firmware_CE.ino.partitions.bin build/rnode_firmware_wireless_paper.partitions
+	zip --junk-paths ./Release/rnode_firmware_wireless_paper.zip ./Release/esptool/esptool.py ./Release/console_image.bin build/rnode_firmware_wireless_paper.boot_app0 build/rnode_firmware_wireless_paper.bin build/rnode_firmware_wireless_paper.bootloader build/rnode_firmware_wireless_paper.partitions
 	rm -r build
 
 release-heltec32_v2_extled:
