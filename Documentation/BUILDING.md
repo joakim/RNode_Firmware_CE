@@ -87,6 +87,7 @@ After flashing a custom board, you will also need to provision the EEPROM before
 0xC4: [420000000, 520000000, 17, "420 - 520 MHz", "rnode_firmware_heltec32v2.zip", "SX1278"],
 0xC9: [850000000, 950000000, 17, "850 - 950 MHz", "rnode_firmware_heltec32v2.zip", "SX1276"],
 0xC5: [470000000, 510000000, 21, "470 - 510 MHz", "rnode_firmware_heltec32v3.zip", "SX1262"],
+0xC8: [420000000, 520000000, 22, "410 - 510 MHz", "rnode_firmware_wireless_paper.zip", "SX1262"],
 0xCA: [863000000, 928000000, 21, "863 - 928 MHz", "rnode_firmware_heltec32v3.zip", "SX1262"],
 0xE4: [420000000, 520000000, 17, "420 - 520 MHz", "rnode_firmware_tbeam.zip", "SX1278"],
 0xE9: [850000000, 950000000, 17, "850 - 950 MHz", "rnode_firmware_tbeam.zip", "SX1276"],
@@ -104,6 +105,7 @@ PRODUCT_T32_20 = 0xB0
 PRODUCT_T32_21 = 0xB1
 PRODUCT_H32_V2 = 0xC0
 PRODUCT_H32_V3 = 0xC1
+PRODUCT_WIRELESS_PAPER = 0xC3
 PRODUCT_TBEAM  = 0xE0
 PRODUCT_HMBRW  = 0xF0
 ```

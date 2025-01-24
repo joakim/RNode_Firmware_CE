@@ -26,6 +26,7 @@
 	#define PRODUCT_T32_21 0xB1
 	#define PRODUCT_H32_V2 0xC0
 	#define PRODUCT_H32_V3 0xC1
+	#define PRODUCT_WIRELESS_PAPER 0xC3 // v1.1
     #define PRODUCT_RAK4631 0x10
     #define PRODUCT_FREENODE 0x20
     #define MODEL_11 0x11
@@ -54,6 +55,7 @@
 	#define MODEL_C4 0xC4
 	#define MODEL_C9 0xC9
 	#define MODEL_C5 0xC5
+	#define MODEL_C8 0xC8 // Heltec Wireless Paper v1.1 LF (433MHz, 470~510MHz)
 	#define MODEL_CA 0xCA
 	#define MODEL_E4 0xE4
 	#define MODEL_E9 0xE9
