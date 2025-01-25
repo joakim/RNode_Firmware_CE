@@ -453,7 +453,7 @@
     #elif BOARD_MODEL == BOARD_WIRELESS_PAPER
       #define IS_ESP32S3 true
       #define HAS_DISPLAY false
-      // #define DISPLAY_MODEL ICMEN2R13EFC1
+      // #define DISPLAY EINK_BW
       // #define DISPLAY_SCALE 1
       #define HAS_BLUETOOTH false
       #define HAS_BLE true
@@ -467,13 +467,8 @@
 
       const int pin_btn_usr1 = 0;
 
-      // #if defined(EXTERNAL_LEDS)
-        const int pin_led_rx = 13; // 18?
-        const int pin_led_tx = 14;
-      // #else
-      //   const int pin_led_rx = 35;
-      //   const int pin_led_tx = 35;
-      // #endif
+      const int pin_led_rx = 18;
+      const int pin_led_tx = 18;
 
       const uint8_t interfaces[INTERFACE_COUNT] = {SX1262};
       const bool interface_cfg[INTERFACE_COUNT][3] = {
@@ -487,27 +482,27 @@
       const int8_t interface_pins[INTERFACE_COUNT][10] = {
                   // SX1262
           {
-              8, // pin_ss
-              9, // pin_sclk
-              10, // pin_mosi
-              11, // pin_miso
-              13, // pin_busy
-              14, // pin_dio
-              12, // pin_reset
+              8,  // pin_ss (LoRa-CS)
+              9,  // pin_sclk (LoRa-SCK)
+              10, // pin_mosi (MOSI)
+              11, // pin_miso (MISO)
+              12, // pin_reset (LoRa-RST)
+              13, // pin_busy (LoRa-BUSY)
+              14, // pin_dio (DIO1 IRQ)
               -1, // pin_txen
               -1, // pin_rxen
               -1  // pin_tcxo_enable
           }
       };
 
-      const int pin_disp_cs = 4;
-      const int pin_disp_dc = 5;
-      const int pin_disp_reset = 6;
-      const int pin_disp_busy = 7;
-      const int pin_disp_en = 45;
-      const int pin_disp_sck = 3;
-      const int pin_disp_mosi = 2;
-      const int pin_disp_miso = -1;
+      // const int pin_disp_mosi = 2; // SDI
+      // const int pin_disp_sck = 3; // Eink-CLK
+      // const int pin_disp_cs = 4; // Eink-CS
+      // const int pin_disp_dc = 5; // D/C
+      // const int pin_disp_reset = 6; // Eink-RST
+      // const int pin_disp_busy = 7; // Eink-BUSY
+      // const int pin_disp_en = 45; // Active low, powers the e-ink display
+      // const int pin_disp_miso = -1;
 
     #elif BOARD_MODEL == BOARD_RNODE_NG_20
       #define HAS_DISPLAY true

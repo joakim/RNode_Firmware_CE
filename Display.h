@@ -67,6 +67,12 @@ void busyCallback(const void* p) {
   #define DISP_ADDR 0x3C
   #define SCL_OLED 18
   #define SDA_OLED 17
+#elif BOARD_MODEL == BOARD_WIRELESS_PAPER
+  #define DISP_W 250
+  #define DISP_H 122
+  #define DISP_ADDR -1
+  #define DISPLAY_MODEL GxEPD2_213_BN
+  // #define DISPLAY_MODEL ICMEN2R13EFC1
 #elif BOARD_MODEL == BOARD_RNODE_NG_21
   #if DISPLAY == OLED
   #define DISP_RST -1
@@ -126,6 +132,11 @@ GxEPD2_BW<DISPLAY_MODEL, DISPLAY_MODEL::HEIGHT> display(DISPLAY_MODEL(pin_disp_c
 float disp_target_fps = 0.2;
 uint32_t last_epd_refresh = 0;
 #define REFRESH_PERIOD 300000 // 5 minutes in ms
+#elif BOARD_MODEL == BOARD_WIRELESS_PAPER
+  GxEPD2_BW<DISPLAY_MODEL, DISPLAY_MODEL::HEIGHT> display(DISPLAY_MODEL(pin_disp_cs, pin_disp_dc, pin_disp_reset, pin_disp_busy));
+  float disp_target_fps = 0.2;
+  uint32_t last_epd_refresh = 0;
+  #define REFRESH_PERIOD 300000 // 5 minutes in ms
 #else
   #if DISPLAY == OLED
   Adafruit_SSD1306 display(DISP_W, DISP_H, &Wire, DISP_RST);
@@ -235,6 +246,18 @@ bool display_init() {
       digitalWrite(pin_display_en, HIGH);
       delay(50);
       Wire.begin(SDA_OLED, SCL_OLED);
+    #elif BOARD_MODEL == BOARD_WIRELESS_PAPER
+      pinMode(pin_disp_en, INPUT_PULLUP);
+      digitalWrite(pin_disp_en, HIGH);
+
+      display.init(0, true, 10, false, SPI, SPISettings(4000000, MSBFIRST, SPI_MODE0));
+      display.setPartialWindow(0, 0, DISP_W, DISP_H);
+
+      // Because refreshing this display can take some time, sometimes serial
+      // commands will be missed. Therefore, during periods where the device is
+      // waiting for the display to update, it will poll the serial buffer to
+      // check for any commands from the host.
+      display.epd2.setBusyCallback(busyCallback);
     #elif BOARD_MODEL == BOARD_LORA32_V1_0
       int pin_display_en = 16;
       digitalWrite(pin_display_en, LOW);
@@ -311,6 +334,9 @@ bool display_init() {
         disp_mode = DISP_MODE_LANDSCAPE;
         display.setRotation(0);
       #elif BOARD_MODEL == BOARD_HELTEC32_V2
+        disp_mode = DISP_MODE_PORTRAIT;
+        display.setRotation(1);
+      #elif BOARD_MODEL == BOARD_WIRELESS_PAPER
         disp_mode = DISP_MODE_PORTRAIT;
         display.setRotation(1);
       #elif BOARD_MODEL == BOARD_RAK4631
